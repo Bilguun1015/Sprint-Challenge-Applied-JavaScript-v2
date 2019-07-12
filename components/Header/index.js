@@ -10,10 +10,9 @@
 // And add it to the DOM in the .headerContainer component
 
 const headerContainer = document.querySelector('.header-container');
-console.log(headerContainer)
-headerContainer.appendChild(createHeader());
+headerContainer.appendChild(Header());
 
-function createHeader() {
+function Header() {
     const header = document.createElement('div');
     const date = document.createElement('span');
     const headerTitle = document.createElement('h1');
@@ -24,7 +23,6 @@ function createHeader() {
     temp.classList.add('temp');
 
     const now = new Date();
-    console.log(now)
     headerTitle.textContent = 'Lambda Times';
     date.textContent = `${now.getMonth()} ${now.getDate()}, ${now.getFullYear()}`
     temp.textContent = '23C';

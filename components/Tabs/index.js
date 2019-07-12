@@ -7,47 +7,43 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
-const topics = document.querySelector('.topics'); 
-axios.get(`https://lambda-times-backend.herokuapp.com/topics`)
-    .then(data=>{
-        const dataLambda = data.data.topics;
-        console.log(dataLambda)
-        dataLambda.forEach(item => {
-            const element = createTab(item);
-            topics.appendChild(element)
-        });  
-    })
-    .catch(error=>{
-        console.log('The lambda backend is currently not working',error)
-    })
 
 
+const topics = document.querySelector('.topics');
 
-function createTab(array){
-   const tab = document.createElement('div');
-   tab.classList.add('tab');
-   tab.textContent = array;
+axios
+  .get('https://lambda-times-backend.herokuapp.com/topics')
+  .then(response => {
+    response.data.topics.forEach(topic => {
+      topics.appendChild(Tab(topic));
+    });
+  })
+  .catch(err => console.error(err));
 
-   tab.addEventListener('click', event=>{
-       console.log('button clicked', event.target);
-       cardstoShow = document.querySelectorAll('.card')
-       cardstoShow.style.display = 'none';
-   })
-
-   return tab;
+function Tab(topic) {
+  const tab = document.createElement('div');
+  tab.classList.add('tab');
+  tab.textContent = topic;
+  return tab;
 }
 
-function createAllTab(){
-    const tabAll = document.createElement('div');
-    tabAll.classList.add('tab');
-    tabAll.textContent = 'All';
-
-    tabAll.addEventListener('click',event=>{
-
-    })
-
-    return tabAll;
-
+// function selectCards(){
+//     const cards = document.querySelectorAll('.card');
+//     const cardsArray = Array.from(cards)
+//     const tabs = document.querySelectorAll('.tab')
     
-}
-topics.appendChild(createAllTab());
+// }
+
+
+
+// function createAllTab(){
+//     const tabAll = document.createElement('div');
+//     tabAll.classList.add('tab', 'active-tab');
+//     tabAll.textContent = 'All';
+
+//     tabAll.addEventListener('click',selectCards)
+
+//     return tabAll;
+// }
+//topics.appendChild(createAllTab());
+
